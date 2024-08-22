@@ -1,0 +1,22 @@
+name: release test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build_cli_x86_64_unknown_linux_musl:
+    runs-on: docker
+    container:
+      image: alpine
+    name: cli x86_64-unknown-linux-musl
+    steps:
+      - name: prepare container
+        run: apk add --no-cache build-base musl-dev openssl-dev linux-headers rustup libgcc libstdc++ git openssl-libs-static
+      - uses: actions/checkout@v2
+      - name: cargo build
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          rustup target add x86_64-unknown-linux-musl
+          cargo build --target x86_64-unknown-linux-musl --release --package web5_cli
+          cp -v target/x86_64-unknown-linux-musl/release/web5_cli web5_cli-x86_64-unknown-linux-musl
