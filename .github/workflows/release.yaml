@@ -1,0 +1,69 @@
+name: Build CLI
+
+on:
+  release: {}
+
+jobs:
+  build_aarch64_apple_darwin:
+    runs-on: macos-latest
+    name: Build aarch64-apple-darwin target
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Rust
+        run: rustup toolchain install stable
+      - name: Run Build Script
+        run: |
+          cd crates/web5_cli/build/aarch64_apple_darwin
+          ./build
+          mv release/web5_cli ../../../../web5_cli-aarch64-apple-darwin
+      - uses: AButler/upload-release-assets@v3.0
+        with:
+          files: web5_cli-aarch64-apple-darwin
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  build_x86_64_apple_darwin:
+    runs-on: macos-12
+    name: Build x86_64-apple-darwin target
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Rust
+        run: rustup toolchain install stable
+      - name: Run Build Script
+        run: |
+          cd crates/web5_cli/build/x86_64_apple_darwin
+          ./build
+          mv release/web5_cli ../../../../web5_cli-x86_64-apple-darwin
+      - uses: AButler/upload-release-assets@v3.0
+        with:
+          files: web5_cli-x86_64-apple-darwin
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  build_x86_64_unknown_linux_gnu:
+    runs-on: ubuntu-latest
+    name: Build x86_64-unknown-linux-gnu target
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Build Script
+        run: |
+          cd crates/web5_cli/build/x86_64_unknown_linux_gnu
+          ./build
+          mv release/web5_cli ../../../../web5_cli-x86_64-unknown-linux-gnu
+      - uses: AButler/upload-release-assets@v3.0
+        with:
+          files: web5_cli-x86_64-unknown-linux-gnu
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  build_x86_64_unknown_linux_musl:
+    runs-on: ubuntu-latest
+    name: Build x86_64-unknown-linux-musl target
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Build Script
+        run: |
+          cd crates/web5_cli/build/x86_64_unknown_linux_musl
+          ./build
+          mv release/web5_cli ../../../../web5_cli-x86_64-unknown-linux-musl
+      - uses: AButler/upload-release-assets@v3.0
+        with:
+          files: web5_cli-x86_64-unknown-linux-musl
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
