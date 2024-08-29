@@ -12,8 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run Build Script
         run: |
-          pushd
-          cd crates/web5_cli/build/x86_64_unknown_linux_musl
+          pushd crates/web5_cli/build/x86_64_unknown_linux_musl
           ./build
           popd
           cp target/x86_64-unknown-linux-musl/release/web5_cli web5_cli-x86_64-unknown-linux-musl
