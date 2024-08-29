@@ -5,19 +5,20 @@ on:
   pull_request:
 
 jobs:
-  build_cli_x86_64_unknown_linux_musl:
+  build_x86_64_unknown_linux_musl:
     runs-on: ubuntu-latest
-    container:
-      image: alpine
-    name: cli x86_64-unknown-linux-musl
+    name: Build x86_64-unknown-linux-musl target
     steps:
-      - name: prepare container
-        run: apk add --no-cache build-base musl-dev openssl-dev linux-headers libgcc libstdc++ git openssl-libs-static curl
-      - uses: actions/checkout@v4
-      - name: cargo build
+      - uses: actions/checkout@v2
+      - name: Run Build Script
         run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-          . "$HOME/.cargo/env"
-          rustup target add x86_64-unknown-linux-musl
-          cargo build --target x86_64-unknown-linux-musl --release --package web5_cli
-          cp -v target/x86_64-unknown-linux-musl/release/web5_cli web5_cli-x86_64-unknown-linux-musl
+          pushd
+          cd crates/web5_cli/build/x86_64_unknown_linux_musl
+          ./build
+          popd
+          cp target/x86_64-unknown-linux-musl/release/web5_cli web5_cli-x86_64-unknown-linux-musl
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: web5-x86_64-linux-musl
+          path: web5_cli-x86_64-unknown-linux-musl

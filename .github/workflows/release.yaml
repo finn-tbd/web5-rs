@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  build_aarch64-apple-darwin:
+  build_cli_aarch64-apple-darwin:
     runs-on: macos-latest
     name: aarch64-apple-darwin
     steps:
@@ -39,7 +39,7 @@ jobs:
           files: web5_cli-x86_64-apple-darwin
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-  build_x86_64_unknown_linux_gnu:
+  build_cli_x86_64_unknown_linux_gnu:
     runs-on: ubuntu-latest
     name: x86_64-unknown-linux-gnu
     steps:
@@ -54,19 +54,18 @@ jobs:
           files: web5_cli-x86_64-unknown-linux-gnu
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-  build_x86_64_unknown_linux_musl:
-    runs-on: docker
-    container:
-      image: alpine
-    name: x86_64-unknown-linux-musl
+  build_cli_x86_64_unknown_linux_musl:
+    runs-on: ubuntu-latest
+    name: Build x86_64-unknown-linux-musl target
     steps:
-      - name: prepare container
-        run: apk add --no-cache build-base musl-dev openssl-dev linux-headers rustup libgcc libstdc++ curl git openssl-libs-static cargo nodejs git
       - uses: actions/checkout@v2
-      - name: cargo build
+      - name: Run Build Script
         run: |
-          cargo build --target x86_64-unknown-linux-musl --release --package web5_cli
-          cp -v target/x86_64-unknown-linux-musl/release/web5_cli web5_cli-x86_64-unknown-linux-musl
+          pushd
+          cd crates/web5_cli/build/x86_64_unknown_linux_musl
+          ./build
+          popd
+          cp target/x86_64-unknown-linux-musl/release/web5_cli web5_cli-x86_64-unknown-linux-musl
       - name: upload release asset
         uses: AButler/upload-release-assets@v3.0
         with:
