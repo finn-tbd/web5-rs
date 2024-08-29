@@ -6,7 +6,7 @@ on:
 
 jobs:
   build_cli_x86_64_unknown_linux_musl:
-    runs-on: docker
+    runs-on: ubuntu-latest
     container:
       image: alpine
     name: cli x86_64-unknown-linux-musl
