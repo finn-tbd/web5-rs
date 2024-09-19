@@ -287,7 +287,7 @@ jobs:
         uses: actions/download-artifact@v4.1.7
         with:
           name: web5_cli-aarch64-apple-darwin
-          path: ./web5_cli-aarch64-apple-darwin
+          path: "."
       - name: Upload Release Assets (web5_cli-aarch64-apple-darwin)
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
         env:
@@ -302,7 +302,7 @@ jobs:
         uses: actions/download-artifact@v4.1.7
         with:
           name: web5_cli-aarch64-apple-darwin
-          path: ./web5_cli-aarch64-apple-darwin
+          path: "."
       - name: Upload Release Assets (web5_cli-aarch64-apple-darwin)
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
         env:
@@ -317,7 +317,7 @@ jobs:
         uses: actions/download-artifact@v4.1.7
         with:
           name: web5_cli-x86_64-unknown-linux-gnu
-          path: ./web5_cli-x86_64-unknown-linux-gnu
+          path: "."
       - name: Upload Release Assets (web5_cli-x86_64-unknown-linux-gnu)
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
         env:
@@ -332,7 +332,7 @@ jobs:
         uses: actions/download-artifact@v4.1.7
         with:
           name: web5_cli-x86_64-unknown-linux-musl
-          path: ./web5_cli-x86_64-unknown-linux-musl
+          path: "."
       - name: Upload Release Assets (web5_cli-x86_64-unknown-linux-musl)
         uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
         env:
