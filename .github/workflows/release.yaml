@@ -295,6 +295,7 @@ jobs:
         with:
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_path: web5_cli-aarch64-apple-darwin
+          asset_name: web5_cli-aarch64-apple-darwin
 
       - name: Download web5_cli-aarch64-apple-darwin
         uses: actions/download-artifact@v4.1.7
@@ -308,6 +309,7 @@ jobs:
         with:
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_path: web5_cli-aarch64-apple-darwin
+          asset_name: web5_cli-aarch64-apple-darwin
 
       - name: Download web5_cli-x86_64-unknown-linux-gnu
         uses: actions/download-artifact@v4.1.7
@@ -321,6 +323,7 @@ jobs:
         with:
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_path: web5_cli-x86_64-unknown-linux-gnu
+          asset_name: web5_cli-x86_64-unknown-linux-gnu
 
       - name: Download web5_cli-x86_64-unknown-linux-musl
         uses: actions/download-artifact@v4.1.7
@@ -334,6 +337,7 @@ jobs:
         with:
           upload_url: ${{ steps.release.outputs.upload_url }}
           asset_path: web5_cli-x86_64-unknown-linux-musl
+          asset_name: web5_cli-x86_64-unknown-linux-musl
 
   kotlin-docs:
     permissions:
