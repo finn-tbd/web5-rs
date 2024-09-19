@@ -35,6 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4.0.0
         with:
           name: web5_cli-aarch64-apple-darwin
+          path: web5_cli-aarch64-apple-darwin
 
   build_cli_x86_64_apple_darwin:
     runs-on: macos-12
@@ -51,6 +52,7 @@ jobs:
         uses: actions/upload-artifact@v4.0.0
         with:
           name: web5_cli-x86_64-apple-darwin
+          path: web5_cli-x86_64-apple-darwin
 
   build_cli_x86_64_unknown_linux_gnu:
     runs-on: ubuntu-latest
@@ -65,6 +67,7 @@ jobs:
         uses: actions/upload-artifact@v4.0.0
         with:
           name: web5_cli-x86_64-unknown-linux-gnu
+          path: web5_cli-x86_64-unknown-linux-gnu
 
   build_cli_x86_64_unknown_linux_musl:
     runs-on: ubuntu-latest
@@ -81,6 +84,7 @@ jobs:
         uses: actions/upload-artifact@v4.0.0
         with:
           name: web5_cli-x86_64-unknown-linux-musl
+          path: web5_cli-x86_64-unknown-linux-musl
 
   git-tag:
     runs-on: ubuntu-latest
