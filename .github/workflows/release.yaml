@@ -231,7 +231,7 @@ jobs:
           path: bound/kt/src/main/resources/
 
       - name: Deploy Release Version of Kotlin Project to Maven Central
-        if: ${{ env.SONATYPE_PASSWORD }} != ''
+        if: ${{ env.SONATYPE_PASSWORD != '' }}
         run: |
           # cd into the Kotlin project
           cd bound/kt/
