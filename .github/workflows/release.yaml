@@ -15,7 +15,7 @@ jobs:
   run-ci:
     # This will run CI and also publish the Kotlin release to the TBD Artifactory repo manager
     name: Run CI
-    uses: TBD54566975/web5-rs/.github/workflows/ci.yml@main
+    uses: finn-tbd/web5-rs/.github/workflows/ci.yml@main
     secrets: inherit
     with:
       version: ${{ github.event.inputs.version }}
