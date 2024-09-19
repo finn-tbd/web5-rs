@@ -253,6 +253,88 @@ jobs:
           SIGN_KEY_PASS: ${{ secrets.GPG_SECRET_PASSPHRASE }}
           SIGN_KEY: ${{ secrets.GPG_SECRET_KEY }}
 
+      - name: Create GitHub Release
+        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # v1.1.4 final release
+        id: release
+        with:
+          tag_name: "v${{ github.event.inputs.version }}"
+          release_name: "v${{ github.event.inputs.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download MacOS x86_64 Native Library
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: x86_64-apple-darwin-dylib
+          path: bound/kt/src/main/resources/
+      - name: Download Linux x86_64 GNU Native Library
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: x86_64-unknown-linux-gnu-so
+          path: bound/kt/src/main/resources/
+      - name: Download Linux x86_64 MUSL Native Library
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: x86_64-unknown-linux-musl-so
+          path: bound/kt/src/main/resources/
+      - name: Download Windows x86_64 MSVC Native Library
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: x86_64-pc-windows-msvc-dll
+          path: bound/kt/src/main/resources/
+
+      - name: Download web5_cli-aarch64-apple-darwin
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: web5_cli-aarch64-apple-darwin
+          path: ./web5_cli-aarch64-apple-darwin
+      - name: Upload Release Assets (web5_cli-aarch64-apple-darwin)
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}s
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: web5_cli-aarch64-apple-darwin
+
+      - name: Download web5_cli-aarch64-apple-darwin
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: web5_cli-aarch64-apple-darwin
+          path: ./web5_cli-aarch64-apple-darwin
+      - name: Upload Release Assets (web5_cli-aarch64-apple-darwin)
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}s
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: web5_cli-aarch64-apple-darwin
+
+      - name: Download web5_cli-x86_64-unknown-linux-gnu
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: web5_cli-x86_64-unknown-linux-gnu
+          path: ./web5_cli-x86_64-unknown-linux-gnu
+      - name: Upload Release Assets (web5_cli-x86_64-unknown-linux-gnu)
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}s
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: web5_cli-x86_64-unknown-linux-gnu
+
+      - name: Download web5_cli-x86_64-unknown-linux-musl
+        uses: actions/download-artifact@v4.1.7
+        with:
+          name: web5_cli-x86_64-unknown-linux-musl
+          path: ./web5_cli-x86_64-unknown-linux-musl
+      - name: Upload Release Assets (web5_cli-x86_64-unknown-linux-musl)
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}s
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: web5_cli-x86_64-unknown-linux-musl
+
   kotlin-docs:
     permissions:
       contents: read
