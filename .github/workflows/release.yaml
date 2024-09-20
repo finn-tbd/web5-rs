@@ -288,60 +288,21 @@ jobs:
         with:
           name: web5_cli-aarch64-apple-darwin
           path: "."
-      # - name: Upload Release Assets (web5_cli-aarch64-apple-darwin)
-      #   uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.release.outputs.upload_url }}
-      #     asset_path: ./web5_cli-aarch64-apple-darwin
-      #     asset_name: web5_cli-aarch64-apple-darwin
-      #     asset_content_type: application/binary
-
       - name: Download web5_cli-aarch64-apple-darwin
         uses: actions/download-artifact@v4.1.7
         with:
           name: web5_cli-aarch64-apple-darwin
           path: "."
-      # - name: Upload Release Assets (web5_cli-aarch64-apple-darwin)
-      #   uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.release.outputs.upload_url }}
-      #     asset_path: ./web5_cli-aarch64-apple-darwin
-      #     asset_name: web5_cli-aarch64-apple-darwin
-      #     asset_content_type: application/binary
-
       - name: Download web5_cli-x86_64-unknown-linux-gnu
         uses: actions/download-artifact@v4.1.7
         with:
           name: web5_cli-x86_64-unknown-linux-gnu
           path: "."
-      # - name: Upload Release Assets (web5_cli-x86_64-unknown-linux-gnu)
-      #   uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.release.outputs.upload_url }}
-      #     asset_path: ./web5_cli-x86_64-unknown-linux-gnu
-      #     asset_name: web5_cli-x86_64-unknown-linux-gnu
-      #     asset_content_type: application/binary
-
       - name: Download web5_cli-x86_64-unknown-linux-musl
         uses: actions/download-artifact@v4.1.7
         with:
           name: web5_cli-x86_64-unknown-linux-musl
           path: "."
-      # - name: Upload Release Assets (web5_cli-x86_64-unknown-linux-musl)
-      #   uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.release.outputs.upload_url }}
-      #     asset_path: ./web5_cli-x86_64-unknown-linux-musl
-      #     asset_name: web5_cli-x86_64-unknown-linux-musl
-      #     asset_content_type: application/binary
       - name: Upload release assets
         run: |
           set -ex
@@ -351,7 +312,7 @@ jobs:
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
               -H "X-GitHub-Api-Version: 2022-11-28" \
               -H "Content-Type: application/octet-stream" \
-              "${{ steps.release.outputs.upload_url }}?name=${asset}" \
+              "https://uploads.github.com/repos/finn-tbd/web5-rs/releases/${{ steps.release.outputs.id }}/assets?name=${asset}"
               --data-binary "@${asset}"
           done
 
